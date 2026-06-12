@@ -21,24 +21,24 @@ class AuthController extends Controller
     public function store(StoreRequest $request){
         $user = User::create($request->all());
         $token = $user->createToken($user->email);
-        return Response::success('Usuário cadastrado com sucesso', SymfonyResponse::HTTP_CREATED, ['token' => $token->plainTextToken]);
+        return Response::success('User created', SymfonyResponse::HTTP_CREATED, ['token' => $token->plainTextToken]);
     }
 
     public function login(LoginRequest $request){
         $credentials = $request->only('email', 'password');
         if (!Auth::attempt($credentials)) {
             throw ValidationException::withMessages([
-               'email' => 'Email ou/e senha incorretas',
+               'email' => 'Email or password are incorrect',
             ]);
         } 
         $user = User::where('email', $request->email)->first();
         $token = $user->createToken($user->email);
-        return Response::success('Login efetuado com sucesso', SymfonyResponse::HTTP_OK, ['token' => $token->plainTextToken]);
+        return Response::success('Login success', SymfonyResponse::HTTP_OK, ['token' => $token->plainTextToken]);
     }
 
     public function logout(){
         $user = User::find(Auth::user()->id);
         $user->tokens()->delete();
-        return Response::success('Logout efetuado com sucesso');
+        return Response::success('Logout success', SymfonyResponse::HTTP_OK);
     }
 }
