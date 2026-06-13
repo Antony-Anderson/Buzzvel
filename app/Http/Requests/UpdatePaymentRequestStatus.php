@@ -21,7 +21,8 @@ class UpdatePaymentRequestStatus extends FormRequest
     {
         throw new HttpResponseException(
             Response::error(
-                'Only finance users can approve or reject payment requests.'
+                'Only finance users can approve or reject payment requests.',
+                \Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN
             )
         );
     }

@@ -63,7 +63,6 @@ class ExchangeRateService
         } catch (ValidationException $e) {
             throw $e;
         } catch (Exception $e) {
-            dd($e);
             Log::error('Exchange rate fetch exception', ['message' => $e->getMessage()]);
             throw new Exception('Failed to connect to exchange rate provider: ' . $e->getMessage());
         }
