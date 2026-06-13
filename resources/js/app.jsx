@@ -21,16 +21,13 @@ function App() {
   const [selectedRequestId, setSelectedRequestId] = useState(null);
 
   const [toasts, setToasts] = useState([]);
-  const [exchangeRates, setExchangeRates] = useState({
-    USD: 1.0827,
-    BRL: 5.5385,
-    GBP: 0.8649,
-    JPY: 159.41,
-    EUR: 1.0
-  });
+  const [loadingDashboard, setLoadingDashboard] = useState(true);
+  const [ratesLoading, setRatesLoading] = useState(true);
+  const [exchangeRates, setExchangeRates] = useState({});
 
   useEffect(() => {
     async function fetchRates() {
+      setRatesLoading(true);
       try {
         const response = await fetch('https://open.er-api.com/v6/latest/EUR');
         if (response.ok) {
@@ -41,6 +38,15 @@ function App() {
         }
       } catch (err) {
         console.warn('Could not fetch exchange rates from public API, using default values.', err);
+        setExchangeRates({
+          USD: 1.0827,
+          BRL: 5.5385,
+          GBP: 0.8649,
+          JPY: 159.41,
+          EUR: 1.0
+        });
+      } finally {
+        setRatesLoading(false);
       }
     }
     fetchRates();
@@ -102,6 +108,8 @@ function App() {
       url += `&status=${filters.status}`;
     }
 
+    setLoadingDashboard(true);
+
     try {
       const response = await fetch(url, {
         headers: {
@@ -144,6 +152,8 @@ function App() {
     } catch (err) {
       console.error('Failed to load dashboard data:', err);
       addToast('Failed to fetch payment requests from server.', 'error');
+    } finally {
+      setLoadingDashboard(false);
     }
   };
 
@@ -250,6 +260,7 @@ function App() {
               <Overview
                 requests={requests}
                 pagination={pagination}
+                loading={loadingDashboard}
                 onPageChange={(page) => setPagination(prev => ({ ...prev, page }))}
                 onFilterChange={setFilters}
                 onSortChange={(sort) => setFilters(prev => ({ ...prev, sort }))}
@@ -263,6 +274,7 @@ function App() {
               <CreateRequest
                 token={token}
                 exchangeRates={exchangeRates}
+                ratesLoading={ratesLoading}
                 addToast={addToast}
                 onCancel={() => setCurrentView('overview')}
                 onSuccess={() => setCurrentView('overview')}

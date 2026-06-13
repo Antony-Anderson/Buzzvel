@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { OverviewSkeleton } from './skeleton';
+
 export default function Overview({
     requests,
     pagination,
+    loading = false,
     onPageChange,
     onFilterChange,
     onSortChange,
@@ -36,6 +39,11 @@ export default function Overview({
     const processedPercentage = (processedCount / totalCount) * 100;
     const startResult = requests.length > 0 ? (pagination.page - 1) * pagination.perPage + 1 : 0;
     const endResult = Math.min(startResult + requests.length - 1, pagination.total);
+
+    if (loading) {
+        return <OverviewSkeleton />;
+    }
+
     return (
         <div className="space-y-6">
             <div>

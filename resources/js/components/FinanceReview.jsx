@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FinanceReviewSkeleton } from './skeleton';
 
 export default function FinanceReview({ token, requestId, addToast, onCancel, onDecisionSuccess }) {
   const [request, setRequest] = useState(null);
@@ -74,11 +75,7 @@ export default function FinanceReview({ token, requestId, addToast, onCancel, on
   };
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20 text-brand-text-muted">
-        Loading payment request details...
-      </div>
-    );
+    return <FinanceReviewSkeleton />;
   }
 
   if (!request) return null;

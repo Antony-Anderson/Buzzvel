@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { CreateRequestSkeleton } from './skeleton';
 
 const currencyDisplayNames = new Intl.DisplayNames(['en'], { type: 'currency' });
 
@@ -11,7 +12,7 @@ function getCurrencyLabel(code) {
   }
 }
 
-export default function CreateRequest({ token, exchangeRates, addToast, onCancel, onSuccess }) {
+export default function CreateRequest({ token, exchangeRates, ratesLoading = false, addToast, onCancel, onSuccess }) {
   const [currency, setCurrency] = useState('USD');
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
@@ -41,6 +42,11 @@ export default function CreateRequest({ token, exchangeRates, addToast, onCancel
       setEstimate(amt / rate);
     }
   }, [amount, currency, exchangeRates]);
+
+  if (ratesLoading) {
+    return <CreateRequestSkeleton />;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -96,7 +102,7 @@ export default function CreateRequest({ token, exchangeRates, addToast, onCancel
                     required
                     value={currency}
                     onChange={(e) => setCurrency(e.target.value)}
-                    disabled={!currencies.length}
+                    disabled={!currencies.length || ratesLoading}
                     className="w-full bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/50 rounded-lg py-2.5 px-3.5 text-xs text-white outline-none cursor-pointer appearance-none transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {currencies.length === 0 ? (
