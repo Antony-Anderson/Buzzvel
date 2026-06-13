@@ -1,7 +1,7 @@
-//
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import Login from './components/Login';
+import Register from './components/Register';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Overview from './components/Overview';
@@ -15,7 +15,8 @@ function App() {
   const { theme, toggleTheme } = useTheme();
   const [token, setToken] = useState(localStorage.getItem('buzzvel_token') || null);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('buzzvel_user')) || null);
-  const [currentView, setCurrentView] = useState('overview'); // overview, requests, create, review
+  const [currentView, setCurrentView] = useState('overview'); 
+  const [authPage, setAuthPage] = useState('login');
 
   const [requests, setRequests] = useState([]);
   const [pagination, setPagination] = useState({ page: 1, lastPage: 1, perPage: 10, total: 0 });
@@ -183,6 +184,17 @@ function App() {
     setCurrentView('overview');
   };
 
+  const handleRegisterSuccess = (newToken) => {
+    if (newToken) {
+      setToken(newToken);
+      localStorage.setItem('buzzvel_token', newToken);
+      setCurrentView('overview');
+    } else {
+      setAuthPage('login');
+      addToast('Account created! Please sign in.', 'success');
+    }
+  };
+
   const handleLogout = () => {
     if (token) {
       fetch('/api/logout', {
@@ -198,6 +210,7 @@ function App() {
     setToken(null);
     setUser(null);
     setCurrentView('overview');
+    setAuthPage('login');
     addToast('Logged out successfully');
   };
 
@@ -227,7 +240,23 @@ function App() {
             <Toast key={t.id} message={t.message} type={t.type} onClose={() => removeToast(t.id)} />
           ))}
         </div>
-        <Login onLoginSuccess={handleLoginSuccess} addToast={addToast} theme={theme} toggleTheme={toggleTheme} />
+        {authPage === 'login' ? (
+          <Login
+            onLoginSuccess={handleLoginSuccess}
+            addToast={addToast}
+            theme={theme}
+            toggleTheme={toggleTheme}
+            onGoToRegister={() => setAuthPage('register')}
+          />
+        ) : (
+          <Register
+            onRegisterSuccess={handleRegisterSuccess}
+            addToast={addToast}
+            theme={theme}
+            toggleTheme={toggleTheme}
+            onGoToLogin={() => setAuthPage('login')}
+          />
+        )}
       </>
     );
   }
