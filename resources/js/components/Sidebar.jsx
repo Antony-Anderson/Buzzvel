@@ -25,14 +25,14 @@ export default function Sidebar({ currentView, switchView, user, pendingReviewCo
   ];
 
   return (
-    <aside className="w-full md:w-64 bg-[#0d0e11] border-b md:border-b-0 md:border-r border-brand-border/60 flex flex-col shrink-0">
+    <aside className="w-full md:w-64 bg-brand-surface border-b md:border-b-0 md:border-r border-brand-border/60 flex flex-col shrink-0">
       <div className="p-6 border-b border-brand-border/40 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
           <div className="w-9 h-9 bg-brand-coral flex items-center justify-center rounded-lg shadow-md shadow-brand-coral/10">
             <span className="text-white font-extrabold text-xl tracking-tighter">B</span>
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold tracking-tight leading-none text-white">Management</span>
+            <span className="text-sm font-semibold tracking-tight leading-none text-brand-foreground">Management</span>
             <span className="text-[10px] text-brand-text-muted leading-none mt-1">Payment Portal</span>
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function Sidebar({ currentView, switchView, user, pendingReviewCo
               onClick={() => switchView(link.id)}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition duration-200 cursor-pointer ${isActive
                 ? 'bg-brand-coral text-white glow-coral-sm'
-                : 'text-brand-text-muted hover:bg-brand-card hover:text-white'
+                : 'text-brand-text-muted hover:bg-brand-card hover:text-brand-foreground'
                 }`}
             >
               {link.icon}
@@ -61,7 +61,7 @@ export default function Sidebar({ currentView, switchView, user, pendingReviewCo
             onClick={() => switchView('review')}
             className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition duration-200 cursor-pointer ${currentView === 'review'
               ? 'bg-brand-coral text-white glow-coral-sm'
-              : 'text-brand-text-muted hover:bg-brand-card hover:text-white'
+              : 'text-brand-text-muted hover:bg-brand-card hover:text-brand-foreground'
               }`}
           >
             <div className="flex items-center gap-3">

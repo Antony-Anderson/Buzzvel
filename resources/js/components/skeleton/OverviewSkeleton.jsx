@@ -71,7 +71,7 @@ export default function OverviewSkeleton() {
         <div className="overflow-x-auto min-w-full">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-brand-border/40 bg-[#0d0e11]/30">
+              <tr className="border-b border-brand-border/40 bg-brand-surface/30">
                 {['w-24', 'w-28', 'w-24', 'w-16', 'w-32', 'w-4'].map((width, i) => (
                   <th key={i} className="py-3 px-6">
                     <Skeleton className={`h-2.5 ${width} ${i === 2 ? 'ml-auto sm:ml-0' : ''} ${i === 3 ? 'mx-auto' : ''}`} />

@@ -79,7 +79,7 @@ export default function CreateRequest({ token, exchangeRates, ratesLoading = fal
     <div className="max-w-5xl mx-auto space-y-6">
 
       <div>
-        <h1 className="text-3xl font-extrabold tracking-tight text-white">
+        <h1 className="text-3xl font-extrabold tracking-tight text-brand-foreground">
           Create Payment <span className="text-brand-coral">Request</span>
         </h1>
         <p className="text-xs text-brand-text-muted mt-2 max-w-2xl leading-relaxed">
@@ -93,7 +93,7 @@ export default function CreateRequest({ token, exchangeRates, ratesLoading = fal
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
               <div>
-                <label className="block text-[10px] font-bold tracking-widest text-[#ff8e8e] uppercase mb-1.5" htmlFor="req-currency">
+                <label className="block text-[10px] font-bold tracking-widest text-brand-accent uppercase mb-1.5" htmlFor="req-currency">
                   Currency Code
                 </label>
                 <div className="relative">
@@ -103,7 +103,7 @@ export default function CreateRequest({ token, exchangeRates, ratesLoading = fal
                     value={currency}
                     onChange={(e) => setCurrency(e.target.value)}
                     disabled={!currencies.length || ratesLoading}
-                    className="w-full bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/50 rounded-lg py-2.5 px-3.5 text-xs text-white outline-none cursor-pointer appearance-none transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/50 rounded-lg py-2.5 px-3.5 text-xs text-brand-foreground outline-none cursor-pointer appearance-none transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {currencies.length === 0 ? (
                       <option value="">Loading currencies...</option>
@@ -124,7 +124,7 @@ export default function CreateRequest({ token, exchangeRates, ratesLoading = fal
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold tracking-widest text-[#ff8e8e] uppercase mb-1.5" htmlFor="req-amount">
+                <label className="block text-[10px] font-bold tracking-widest text-brand-accent uppercase mb-1.5" htmlFor="req-amount">
                   Amount
                 </label>
                 <div className="relative">
@@ -137,7 +137,7 @@ export default function CreateRequest({ token, exchangeRates, ratesLoading = fal
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     placeholder="0.00"
-                    className="w-full bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/50 rounded-lg py-2 px-3.5 text-xs text-white placeholder-brand-text-muted/40 outline-none pr-12 transition"
+                    className="w-full bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/50 rounded-lg py-2 px-3.5 text-xs text-brand-foreground placeholder-brand-text-muted/40 outline-none pr-12 transition"
                   />
                   <span className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-xs font-bold text-brand-text-muted/70 uppercase select-none">
                     {currency}
@@ -147,7 +147,7 @@ export default function CreateRequest({ token, exchangeRates, ratesLoading = fal
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold tracking-widest text-[#ff8e8e] uppercase mb-1.5" htmlFor="req-description">
+              <label className="block text-[10px] font-bold tracking-widest text-brand-accent uppercase mb-1.5" htmlFor="req-description">
                 Description
               </label>
               <textarea
@@ -156,24 +156,24 @@ export default function CreateRequest({ token, exchangeRates, ratesLoading = fal
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Briefly describe the purpose of this payment request..."
-                className="w-full bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/50 rounded-lg py-2.5 px-3.5 text-xs text-white placeholder-brand-text-muted/40 outline-none resize-none transition"
+                className="w-full bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/50 rounded-lg py-2.5 px-3.5 text-xs text-brand-foreground placeholder-brand-text-muted/40 outline-none resize-none transition"
               ></textarea>
             </div>
 
-            <div className="p-4 bg-[#0d0e11] border border-brand-border/40 rounded-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 relative">
+            <div className="p-4 bg-brand-inset border border-brand-border/40 rounded-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 relative">
 
               <div className="absolute left-0 top-3 bottom-3 w-1 bg-brand-coral/70 rounded"></div>
               
               <div className="pl-3">
                 <span className="text-[9px] font-bold text-brand-text-muted uppercase">Current EUR Rate (Mock API)</span>
-                <p className="text-xs font-bold mt-1 text-white">
+                <p className="text-xs font-bold mt-1 text-brand-foreground">
                   {rate.toFixed(4)} {currency}/EUR
                 </p>
               </div>
               
               <div className="sm:text-right pl-3 sm:pl-0">
                 <span className="text-[9px] font-bold text-brand-text-muted uppercase">Estimated Total</span>
-                <p className="text-lg font-black mt-1 text-[#ff8e8e]">
+                <p className="text-lg font-black mt-1 text-brand-accent">
                   € {estimate.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </p>
               </div>
@@ -190,7 +190,7 @@ export default function CreateRequest({ token, exchangeRates, ratesLoading = fal
               <button
                 type="button"
                 onClick={onCancel}
-                className="bg-brand-card hover:bg-brand-border/40 text-brand-text-muted hover:text-white px-6 py-2 border border-brand-border/60 rounded-lg text-xs font-bold transition cursor-pointer"
+                className="bg-brand-card hover:bg-brand-border/40 text-brand-text-muted hover:text-brand-foreground px-6 py-2 border border-brand-border/60 rounded-lg text-xs font-bold transition cursor-pointer"
               >
                 Cancel
               </button>

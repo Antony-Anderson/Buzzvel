@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-export default function Login({ onLoginSuccess, addToast }) {
+import ThemeToggle from './ThemeToggle';
+
+export default function Login({ onLoginSuccess, addToast, theme, toggleTheme }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -32,7 +34,10 @@ export default function Login({ onLoginSuccess, addToast }) {
         }
     };
     return (
-        <div className="flex-1 flex flex-col items-center justify-center p-4 relative">
+        <div className="flex-1 flex flex-col items-center justify-center p-4 relative min-h-screen bg-brand-dark">
+            <div className="absolute top-4 right-4 z-10">
+                <ThemeToggle theme={theme} onToggle={toggleTheme} />
+            </div>
             {/* Background glow effects */}
             <div className="absolute w-[400px] h-[400px] rounded-full bg-brand-coral/10 blur-[120px] pointer-events-none top-1/4 left-1/4"></div>
             <div className="absolute w-[350px] h-[350px] rounded-full bg-brand-coral/5 blur-[100px] pointer-events-none bottom-1/4 right-1/4"></div>
@@ -45,9 +50,9 @@ export default function Login({ onLoginSuccess, addToast }) {
                         <div className="w-9 h-9 bg-brand-coral flex items-center justify-center rounded-lg shadow-lg shadow-brand-coral/30">
                             <span className="text-white font-extrabold text-xl tracking-tighter">b</span>
                         </div>
-                        <span className="text-2xl font-semibold tracking-tight text-white">buzzvel</span>
+                        <span className="text-2xl font-semibold tracking-tight text-brand-foreground">buzzvel</span>
                     </div>
-                    <h2 className="text-xl font-bold tracking-tight mt-2 text-white">Finance Portal</h2>
+                    <h2 className="text-xl font-bold tracking-tight mt-2 text-brand-foreground">Finance Portal</h2>
                     <p className="text-xs text-brand-text-muted mt-1">Secure access to payment requests</p>
                 </div>
                 {/* Form */}
@@ -69,12 +74,12 @@ export default function Login({ onLoginSuccess, addToast }) {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="name@buzzvel.com"
-                                className="w-full bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/50 focus:ring-1 focus:ring-brand-coral/30 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-brand-text-muted/50 outline-none transition duration-200"
+                                className="w-full bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/50 focus:ring-1 focus:ring-brand-coral/30 rounded-lg py-2.5 pl-10 pr-4 text-sm text-brand-foreground placeholder-brand-text-muted/50 outline-none transition duration-200"
                             />
                         </div>
                     </div>
                     <div>
-                        <div class="flex items-center justify-between mb-1.5">
+                        <div className="flex items-center justify-between mb-1.5">
                             <label className="block text-[10px] font-bold tracking-widest text-brand-text-muted uppercase" htmlFor="login-password">
                                 Password
                             </label>
@@ -95,12 +100,12 @@ export default function Login({ onLoginSuccess, addToast }) {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="••••••••"
-                                className="w-full bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/50 focus:ring-1 focus:ring-brand-coral/30 rounded-lg py-2.5 pl-10 pr-10 text-sm text-white placeholder-brand-text-muted/50 outline-none transition duration-200"
+                                className="w-full bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/50 focus:ring-1 focus:ring-brand-coral/30 rounded-lg py-2.5 pl-10 pr-10 text-sm text-brand-foreground placeholder-brand-text-muted/50 outline-none transition duration-200"
                             />
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute inset-y-0 right-0 pr-3 flex items-center text-brand-text-muted hover:text-white transition cursor-pointer"
+                                className="absolute inset-y-0 right-0 pr-3 flex items-center text-brand-text-muted hover:text-brand-foreground transition cursor-pointer"
                             >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

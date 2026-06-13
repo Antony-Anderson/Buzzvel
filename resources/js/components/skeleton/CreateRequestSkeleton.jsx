@@ -28,7 +28,7 @@ export default function CreateRequestSkeleton() {
             <Skeleton className="h-28 w-full rounded-lg" />
           </div>
 
-          <div className="p-4 bg-[#0d0e11] border border-brand-border/40 rounded-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="p-4 bg-brand-inset border border-brand-border/40 rounded-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="space-y-2 pl-3">
               <Skeleton className="h-2.5 w-36" />
               <Skeleton className="h-4 w-28" />

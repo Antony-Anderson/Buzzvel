@@ -7,12 +7,20 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 
     --color-brand-dark: #07080a;
+    --color-brand-surface: #0d0e11;
     --color-brand-card: #121316;
     --color-brand-coral: #ff5252;
     --color-brand-coral-gradient: linear-gradient(135deg, #ff5252 0%, #ff7b7b 100%);
     --color-brand-border: #1e2026;
     --color-brand-input: #18191d;
     --color-brand-text-muted: #8e93a6;
+    --color-brand-foreground: #ffffff;
+    --color-brand-accent: #ff8e8e;
+    --color-brand-track: #1b1c21;
+    --color-brand-inset: #0d0e11;
+    --color-brand-approve: #ffecec;
+    --color-brand-danger-bg: #121316;
+    --color-brand-contrast: #12151c;
 
     --color-status-pending: #ff7676;
     --color-status-approved: #10b981;
@@ -20,31 +28,58 @@
     --color-status-expired: #6b7280;
 }
 
+html.light {
+    --color-brand-dark: #eef0f4;
+    --color-brand-surface: #ffffff;
+    --color-brand-card: #ffffff;
+    --color-brand-border: #dde1e8;
+    --color-brand-input: #f5f6f8;
+    --color-brand-text-muted: #647089;
+    --color-brand-foreground: #12151c;
+    --color-brand-accent: #e04545;
+    --color-brand-track: #e4e7ee;
+    --color-brand-inset: #f3f5f8;
+    --color-brand-approve: #fff1f1;
+    --color-brand-danger-bg: #fef2f2;
+
+    .bg-brand-card {
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    }
+}
+
 @layer base {
-    body {
-        background-color: var(--color-brand-dark);
-        color: #ffffff;
-        font-family: var(--font-sans);
-        overflow-x: hidden;
+    html {
+        color-scheme: dark;
     }
 
-    /* Custom Scrollbars */
+    html.light {
+        color-scheme: light;
+    }
+
+    body {
+        background-color: var(--color-brand-dark);
+        color: var(--color-brand-foreground);
+        font-family: var(--font-sans);
+        overflow-x: hidden;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
     ::-webkit-scrollbar {
         width: 6px;
         height: 6px;
     }
 
     ::-webkit-scrollbar-track {
-        background: #0d0e11;
+        background: var(--color-brand-surface);
     }
 
     ::-webkit-scrollbar-thumb {
-        background: #23252f;
+        background: var(--color-brand-border);
         border-radius: 3px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: #3c3e4f;
+        background: var(--color-brand-text-muted);
     }
 }
 
@@ -53,8 +88,16 @@
         box-shadow: 0 0 15px rgba(255, 82, 82, 0.25);
     }
 
+    html.light .glow-coral {
+        box-shadow: 0 0 15px rgba(255, 82, 82, 0.15);
+    }
+
     .glow-coral-sm {
         box-shadow: 0 0 8px rgba(255, 82, 82, 0.15);
+    }
+
+    html.light .glow-coral-sm {
+        box-shadow: 0 0 8px rgba(255, 82, 82, 0.1);
     }
 
     .glow-green {
@@ -67,6 +110,11 @@
         border: 1px solid rgba(255, 255, 255, 0.03);
     }
 
+    html.light .glass-panel {
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
     .skeleton-shimmer {
         background: linear-gradient(
             90deg,
@@ -76,6 +124,16 @@
         );
         background-size: 200% 100%;
         animation: skeleton-shimmer 1.5s ease-in-out infinite;
+    }
+
+    html.light .skeleton-shimmer {
+        background: linear-gradient(
+            90deg,
+            rgba(228, 231, 238, 0.95) 0%,
+            rgba(245, 246, 248, 1) 50%,
+            rgba(228, 231, 238, 0.95) 100%
+        );
+        background-size: 200% 100%;
     }
 
     @keyframes skeleton-shimmer {

@@ -47,15 +47,15 @@ export default function Overview({
     return (
         <div className="space-y-6">
             <div>
-                <h1 className="text-3xl font-extrabold tracking-tight text-white">Inside Buzzvel</h1>
+                <h1 className="text-3xl font-extrabold tracking-tight text-brand-foreground">Inside Buzzvel</h1>
                 <p className="text-xs text-brand-text-muted mt-2 max-w-2xl leading-relaxed">
                     Track and manage your global payment requests with surgical precision. Our real-time engine ensures mathematical harmony across all high-stakes financial operations.
                 </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 <div className="bg-brand-card border border-brand-border/60 rounded-xl p-6 relative overflow-hidden">
-                    <span className="text-[9px] font-bold tracking-widest text-[#ff8e8e] uppercase">TOTAL MANAGED</span>
-                    <h3 className="text-2xl font-bold mt-2 text-white">
+                    <span className="text-[9px] font-bold tracking-widest text-brand-accent uppercase">TOTAL MANAGED</span>
+                    <h3 className="text-2xl font-bold mt-2 text-brand-foreground">
                         €{totalEur.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </h3>
                     <div className="flex items-center gap-1.5 mt-2.5 text-xs text-emerald-400">
@@ -67,16 +67,16 @@ export default function Overview({
                 </div>
 
                 <div className="bg-brand-card border border-brand-border/60 rounded-xl p-6 relative">
-                    <span className="text-[9px] font-bold tracking-widest text-[#ff8e8e] uppercase">Pending</span>
-                    <h3 className="text-2xl font-bold mt-2 text-white">{pendingCount}</h3>
-                    <div className="w-full bg-[#1b1c21] rounded-full h-1 mt-4.5 overflow-hidden">
-                        <div className="bg-[#ff5252] h-full rounded-full transition-all duration-300" style={{ width: `${pendingPercentage}%` }}></div>
+                    <span className="text-[9px] font-bold tracking-widest text-brand-accent uppercase">Pending</span>
+                    <h3 className="text-2xl font-bold mt-2 text-brand-foreground">{pendingCount}</h3>
+                    <div className="w-full bg-brand-track rounded-full h-1 mt-4.5 overflow-hidden">
+                        <div className="bg-brand-coral h-full rounded-full transition-all duration-300" style={{ width: `${pendingPercentage}%` }}></div>
                     </div>
                 </div>
                 <div className="bg-brand-card border border-brand-border/60 rounded-xl p-6 relative">
-                    <span className="text-[9px] font-bold tracking-widest text-[#ff8e8e] uppercase">Processed 24h</span>
-                    <h3 className="text-2xl font-bold mt-2 text-white">{processedCount}</h3>
-                    <div className="w-full bg-[#1b1c21] rounded-full h-1 mt-4.5 overflow-hidden">
+                    <span className="text-[9px] font-bold tracking-widest text-brand-accent uppercase">Processed 24h</span>
+                    <h3 className="text-2xl font-bold mt-2 text-brand-foreground">{processedCount}</h3>
+                    <div className="w-full bg-brand-track rounded-full h-1 mt-4.5 overflow-hidden">
                         <div className="bg-brand-text-muted h-full rounded-full transition-all duration-300" style={{ width: `${processedPercentage}%` }}></div>
                     </div>
                 </div>
@@ -91,8 +91,8 @@ export default function Overview({
                                     key={status}
                                     onClick={() => onFilterChange({ ...filters, status })}
                                     className={`px-4 py-1.5 text-xs rounded-full font-medium border transition cursor-pointer select-none ${isActive
-                                            ? 'border-brand-border bg-brand-input text-white'
-                                            : 'border-brand-border/60 bg-transparent text-brand-text-muted hover:text-white hover:border-brand-border'
+                                            ? 'border-brand-border bg-brand-input text-brand-foreground'
+                                            : 'border-brand-border/60 bg-transparent text-brand-text-muted hover:text-brand-foreground hover:border-brand-border'
                                         }`}
                                 >
                                     {status === 'all' ? 'All Requests' : status.charAt(0).toUpperCase() + status.slice(1)}
@@ -104,7 +104,7 @@ export default function Overview({
                         <div className="relative">
                             <button
                                 onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
-                                className="flex items-center gap-2 px-3 py-1.5 text-xs rounded-lg border border-brand-border/60 bg-brand-input hover:border-brand-border text-brand-text-muted hover:text-white transition cursor-pointer select-none"
+                                className="flex items-center gap-2 px-3 py-1.5 text-xs rounded-lg border border-brand-border/60 bg-brand-input hover:border-brand-border text-brand-text-muted hover:text-brand-foreground transition cursor-pointer select-none"
                             >
                                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
@@ -119,7 +119,7 @@ export default function Overview({
                                             onSortChange('latest');
                                             setSortDropdownOpen(false);
                                         }}
-                                        className="w-full text-left px-3 py-1.5 text-xs hover:bg-brand-border/40 text-white transition"
+                                        className="w-full text-left px-3 py-1.5 text-xs hover:bg-brand-border/40 text-brand-foreground transition"
                                     >
                                         Latest First
                                     </button>
@@ -128,7 +128,7 @@ export default function Overview({
                                             onSortChange('oldest');
                                             setSortDropdownOpen(false);
                                         }}
-                                        className="w-full text-left px-3 py-1.5 text-xs hover:bg-brand-border/40 text-white transition"
+                                        className="w-full text-left px-3 py-1.5 text-xs hover:bg-brand-border/40 text-brand-foreground transition"
                                     >
                                         Oldest First
                                     </button>
@@ -140,7 +140,7 @@ export default function Overview({
                 <div className="overflow-x-auto min-w-full">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr class="border-b border-brand-border/40 text-[9px] font-bold tracking-widest text-[#ff8e8e] uppercase bg-[#0d0e11]/30">
+                            <tr className="border-b border-brand-border/40 text-[9px] font-bold tracking-widest text-brand-accent uppercase bg-brand-surface/30">
                                 <th className="py-3 px-6 select-none">Request ID</th>
                                 <th className="py-3 px-6 select-none">Local Currency</th>
                                 <th className="py-3 px-6 select-none text-right sm:text-left">Converted EUR</th>
@@ -188,14 +188,14 @@ export default function Overview({
                                             onClick={() => onSelectRequest(req.id)}
                                             className="hover:bg-brand-card/40 transition duration-150 cursor-pointer border-b border-brand-border/10"
                                         >
-                                            <td className="py-3.5 px-6 font-bold text-white tracking-tight">#BZ-90{req.id}</td>
-                                            <td className="py-3.5 px-6 font-medium text-white/95">
+                                            <td className="py-3.5 px-6 font-bold text-brand-foreground tracking-tight">#BZ-90{req.id}</td>
+                                            <td className="py-3.5 px-6 font-medium text-brand-foreground/95">
                                                 <div className="flex items-center gap-2">
                                                     <span className="w-2 h-2 rounded-full bg-brand-text-muted/40"></span>
                                                     <span>{formatCurrency(req.amount, req.currency)}</span>
                                                 </div>
                                             </td>
-                                            <td className="py-3.5 px-6 font-bold text-white text-right sm:text-left">
+                                            <td className="py-3.5 px-6 font-bold text-brand-foreground text-right sm:text-left">
                                                 €{parseFloat(req.converted_amount_eur).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                             </td>
                                             <td className="py-3.5 px-6 text-center">
@@ -205,7 +205,7 @@ export default function Overview({
                                             </td>
                                             <td className="py-3.5 px-6 text-brand-text-muted hidden md:table-cell select-none">{dateStr}</td>
                                             <td className="py-3.5 px-6 text-center select-none w-10">
-                                                <button className="text-brand-text-muted hover:text-white p-1 rounded transition cursor-pointer">
+                                                <button className="text-brand-text-muted hover:text-brand-foreground p-1 rounded transition cursor-pointer">
                                                     <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                                                     </svg>
@@ -227,7 +227,7 @@ export default function Overview({
                             <button
                                 disabled={pagination.page === 1}
                                 onClick={() => onPageChange(pagination.page - 1)}
-                                className="p-1 border border-brand-border/60 rounded hover:border-brand-border text-brand-text-muted hover:text-white transition cursor-pointer select-none disabled:opacity-40"
+                                className="p-1 border border-brand-border/60 rounded hover:border-brand-border text-brand-text-muted hover:text-brand-foreground transition cursor-pointer select-none disabled:opacity-40"
                             >
                                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
@@ -239,8 +239,8 @@ export default function Overview({
                                     key={pNum}
                                     onClick={() => onPageChange(pNum)}
                                     className={`w-7 h-7 text-xs font-semibold rounded border transition cursor-pointer select-none ${pagination.page === pNum
-                                            ? 'bg-[#ffcfcf]/20 border-brand-coral/50 text-[#ff8e8e] font-bold'
-                                            : 'border-brand-border/60 text-brand-text-muted hover:border-brand-border hover:text-white'
+                                            ? 'bg-brand-accent/20 border-brand-coral/50 text-brand-accent font-bold'
+                                            : 'border-brand-border/60 text-brand-text-muted hover:border-brand-border hover:text-brand-foreground'
                                         }`}
                                 >
                                     {pNum}
@@ -249,7 +249,7 @@ export default function Overview({
                             <button
                                 disabled={pagination.page === pagination.lastPage}
                                 onClick={() => onPageChange(pagination.page + 1)}
-                                className="p-1 border border-brand-border/60 rounded hover:border-brand-border text-brand-text-muted hover:text-white transition cursor-pointer select-none disabled:opacity-40"
+                                className="p-1 border border-brand-border/60 rounded hover:border-brand-border text-brand-text-muted hover:text-brand-foreground transition cursor-pointer select-none disabled:opacity-40"
                             >
                                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />

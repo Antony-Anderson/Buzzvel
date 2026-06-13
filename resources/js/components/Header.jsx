@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 export default function Header({
   user,
   onLogout,
   onSearchChange,
   switchView,
+  theme,
+  toggleTheme,
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -52,23 +55,23 @@ export default function Header({
 
   return (
     <>
-      <header className="h-16 border-b border-brand-border/60 bg-[#0d0e11]/80 backdrop-blur px-6 flex items-center justify-between shrink-0">
+      <header className="h-16 border-b border-brand-border/60 bg-brand-surface/80 backdrop-blur px-6 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-8">
-          <span className="text-xl font-bold tracking-tight text-white select-none">
+          <span className="text-xl font-bold tracking-tight text-brand-foreground select-none">
             buzzvel
           </span>
 
           <div className="hidden sm:flex items-center gap-6">
             <button
               onClick={() => switchView('overview')}
-              className="text-xs text-white border-b-2 border-transparent pb-[22px] mt-[20px] font-medium hover:border-brand-coral transition"
+              className="text-xs text-brand-foreground border-b-2 border-transparent pb-[22px] mt-[20px] font-medium hover:border-brand-coral transition"
             >
               Overview
             </button>
 
             <button
               onClick={() => switchView('create')}
-              className="text-xs text-white border-b-2 border-transparent pb-[22px] mt-[20px] font-medium hover:border-brand-coral transition"
+              className="text-xs text-brand-foreground border-b-2 border-transparent pb-[22px] mt-[20px] font-medium hover:border-brand-coral transition"
             >
               Requests
             </button>
@@ -76,13 +79,14 @@ export default function Header({
         </div>
 
         <div className="flex items-center gap-4">
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
           <div className="relative hidden sm:block">
             <input
               type="text"
               placeholder="Search transactions..."
               value={searchValue}
               onChange={handleSearchInput}
-              className="w-56 bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/40 rounded-lg py-1.5 pl-8 pr-4 text-xs text-white placeholder-brand-text-muted/50 outline-none transition duration-200"
+              className="w-56 bg-brand-input border border-brand-border/60 hover:border-brand-border focus:border-brand-coral/40 rounded-lg py-1.5 pl-8 pr-4 text-xs text-brand-foreground placeholder-brand-text-muted/50 outline-none transition duration-200"
             />
 
             <svg
@@ -109,7 +113,7 @@ export default function Header({
                 {getInitials(user?.name)}
               </div>
 
-              <span className="text-xs font-medium text-white max-w-[100px] truncate hidden md:inline">
+              <span className="text-xs font-medium text-brand-foreground max-w-[100px] truncate hidden md:inline">
                 {user?.name || 'User'}
               </span>
 
@@ -131,7 +135,7 @@ export default function Header({
             {dropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-brand-card border border-brand-border rounded-lg shadow-xl py-1.5 z-40">
                 <div className="px-4 py-2">
-                  <p className="text-xs font-semibold text-white">
+                  <p className="text-xs font-semibold text-brand-foreground">
                     {user?.name || 'User Name'}
                   </p>
 
@@ -190,7 +194,7 @@ export default function Header({
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-brand-foreground">
                     Sign Out
                   </h3>
 

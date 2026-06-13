@@ -8,8 +8,11 @@ import Overview from './components/Overview';
 import CreateRequest from './components/CreateRequest';
 import FinanceReview from './components/FinanceReview';
 import Toast from './components/Toast';
+import ThemeToggle from './components/ThemeToggle';
+import { useTheme } from './hooks/useTheme';
 
 function App() {
+  const { theme, toggleTheme } = useTheme();
   const [token, setToken] = useState(localStorage.getItem('buzzvel_token') || null);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('buzzvel_user')) || null);
   const [currentView, setCurrentView] = useState('overview'); // overview, requests, create, review
@@ -224,7 +227,7 @@ function App() {
             <Toast key={t.id} message={t.message} type={t.type} onClose={() => removeToast(t.id)} />
           ))}
         </div>
-        <Login onLoginSuccess={handleLoginSuccess} addToast={addToast} />
+        <Login onLoginSuccess={handleLoginSuccess} addToast={addToast} theme={theme} toggleTheme={toggleTheme} />
       </>
     );
   }
@@ -237,7 +240,7 @@ function App() {
         ))}
       </div>
 
-      <div className="flex-1 flex flex-col md:flex-row min-h-screen bg-[#07080a]">
+      <div className="flex-1 flex flex-col md:flex-row min-h-screen bg-brand-dark">
         <Sidebar
           currentView={currentView}
           switchView={switchView}
@@ -245,7 +248,7 @@ function App() {
           pendingReviewCount={pendingReviewCount}
         />
 
-        <div className="flex-1 flex flex-col min-w-0 bg-[#07080a]">
+        <div className="flex-1 flex flex-col min-w-0 bg-brand-dark">
           <Header
             user={user}
             onLogout={handleLogout}
@@ -253,6 +256,8 @@ function App() {
               setFilters(prev => ({ ...prev, search, page: 1 }))
             }
             switchView={switchView}
+            theme={theme}
+            toggleTheme={toggleTheme}
           />
 
           <main className="flex-1 overflow-y-auto p-6 relative">
@@ -295,7 +300,7 @@ function App() {
             )}
           </main>
 
-          <footer className="h-12 border-t border-brand-border/40 bg-[#0d0e11] px-6 flex items-center justify-between text-[10px] text-brand-text-muted shrink-0">
+          <footer className="h-12 border-t border-brand-border/40 bg-brand-surface px-6 flex items-center justify-between text-[10px] text-brand-text-muted shrink-0">
             <p>© 2026 buzzvel Payment Portal. All rights reserved.</p>
           </footer>
         </div>
