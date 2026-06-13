@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/Models/PaymentRequest.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1781358147003,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1781358147003,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Attributes\\Fillable;\nuse Illuminate\\Database\\Eloquent\\Factories\\HasFactory;\nuse Illuminate\\Database\\Eloquent\\Model;\nuse Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;\n\n#[Fillable([\n    'user_id',\n    'amount',\n    'currency',\n    'exchange_rate',\n    'exchange_rate_source',\n    'exchange_rate_timestamp',\n    'converted_amount_eur',\n    'status',\n    'description'\n])]\nclass PaymentRequest extends Model\n{\n    use HasFactory;\n\n    /**\n     *\n     * @return array<string, string>\n     */\n    protected function casts(): array\n    {\n        return [\n            'amount' => 'decimal:2',\n            'exchange_rate' => 'decimal:6',\n            'exchange_rate_timestamp' => 'datetime',\n            'converted_amount_eur' => 'decimal:2',\n        ];\n    }\n\n    public function user(): BelongsTo\n    {\n        return $this->belongsTo(User::class);\n    }\n\n    protected static function booted(): void\n    {\n        static::updating(function ($paymentRequest) {\n            $immutableFields = [\n                'user_id',\n                'amount',\n                'currency',\n                'exchange_rate',\n                'exchange_rate_source',\n                'exchange_rate_timestamp',\n                'converted_amount_eur'\n            ];\n\n            foreach ($immutableFields as $field) {\n                if ($paymentRequest->isDirty($field)) {\n                    // Silently restore the original values to enforce immutability\n                    $paymentRequest->setAttribute($field, $paymentRequest->getOriginal($field));\n                }\n            }\n        });\n    }\n}\n"
+        }
+    ]
+}

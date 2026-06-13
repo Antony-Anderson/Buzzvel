@@ -23,7 +23,6 @@ class PaymentRequest extends Model
     use HasFactory;
 
     /**
-     * Get the attributes that should be cast.
      *
      * @return array<string, string>
      */
@@ -37,18 +36,11 @@ class PaymentRequest extends Model
         ];
     }
 
-    /**
-     * Get the user that created the payment request.
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * The "booted" method of the model.
-     * Enforce immutability of fields on update.
-     */
     protected static function booted(): void
     {
         static::updating(function ($paymentRequest) {
