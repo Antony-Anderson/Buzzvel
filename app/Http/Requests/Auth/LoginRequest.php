@@ -28,12 +28,4 @@ class LoginRequest extends FormRequest
             'password' => 'required|string'
         ];
     }
-
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'name' => mb_convert_case($this->name, MB_CASE_TITLE, "UTF-8"),
-            'admin' => 0
-        ]);
-    }
 }

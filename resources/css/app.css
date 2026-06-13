@@ -1,9 +1,69 @@
 @import 'tailwindcss';
-
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-brand-dark: #07080a;
+    --color-brand-card: #121316;
+    --color-brand-coral: #ff5252;
+    --color-brand-coral-gradient: linear-gradient(135deg, #ff5252 0%, #ff7b7b 100%);
+    --color-brand-border: #1e2026;
+    --color-brand-input: #18191d;
+    --color-brand-text-muted: #8e93a6;
+
+    --color-status-pending: #ff7676;
+    --color-status-approved: #10b981;
+    --color-status-rejected: #ef4444;
+    --color-status-expired: #6b7280;
+}
+
+@layer base {
+    body {
+        background-color: var(--color-brand-dark);
+        color: #ffffff;
+        font-family: var(--font-sans);
+        overflow-x: hidden;
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #0d0e11;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #23252f;
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #3c3e4f;
+    }
+}
+
+@layer utilities {
+    .glow-coral {
+        box-shadow: 0 0 15px rgba(255, 82, 82, 0.25);
+    }
+
+    .glow-coral-sm {
+        box-shadow: 0 0 8px rgba(255, 82, 82, 0.15);
+    }
+
+    .glow-green {
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+    }
+
+    .glass-panel {
+        background: rgba(18, 19, 22, 0.75);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+    }
 }
