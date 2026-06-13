@@ -1,58 +1,135 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Buzzvel Payment Requests Management
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a web application for refund/payment request management developed with **Laravel 12**, **React (Vite)**, and **PostgreSQL**. The application performs automatic currency conversions to Euro (EUR) by querying an external exchange rates API in real-time.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 System Requirements
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Make sure you have the following installed locally:
+*   **PHP** >= 8.3
+*   **Composer** (PHP dependency manager)
+*   **Node.js** >= 18 and **npm**
+*   **PostgreSQL** (Relational database)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🛠️ Installation & Configuration (Step-by-Step)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+### 1. Clone the Repository
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/Antony-Anderson/Buzzvel.git
+cd buzzvel
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Install PHP Dependencies
+```bash
+composer install
+```
 
-## Contributing
+### 3. Configure Environment Variables
+Copy the `.env.example` file to `.env`:
+```bash
+cp .env.example .env
+```
+Open the `.env` file and configure the connection to your local PostgreSQL database:
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=buzzvel
+DB_USERNAME=buzzvel
+DB_PASSWORD=buzzvel
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Generate the Application Key
+```bash
+php artisan key:generate
+```
 
-## Code of Conduct
+### 5. Run Migrations and Seed the Database
+Run migrations to create the tables and seeders to populate the database with default test accounts and fake payment requests:
+```bash
+php artisan migrate --seed
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 6. Install Frontend Dependencies
+```bash
+npm install
+```
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 💻 Running the Application Locally
 
-## License
+You will need two terminals open to run both the backend and frontend servers simultaneously, or you can use the integrated Composer shortcut:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Integrated Shortcut (Recommended)
+To start both the PHP Artisan server and Vite dev server with a single command:
+```bash
+composer dev
+```
+
+### Manual Method
+*   **Backend Server (PHP):**
+    ```bash
+    php artisan serve
+    ```
+*   **Frontend Server (Vite/Hot Reload):**
+    ```bash
+    npm run dev
+    ```
+
+Access the application in your browser at: `http://localhost:8000` (or the URL displayed in the PHP server terminal).
+
+---
+
+## 🧑‍💻 Test Accounts (Mock Accounts)
+
+The database is pre-populated with the following default test accounts (all of them use the password `test123`):
+
+| Name | Email | Password | Role | Permissions |
+| :--- | :--- | :--- | :--- | :--- |
+| **Antony Anderson** | `user@buzzvel.com` | `test123` | `user` | Create and view their own payment requests. |
+| **Client User** | `client@buzzvel.com` | `test123` | `user` | Create and view their own payment requests. |
+| **Finance Director** | `finance@buzzvel.com` | `test123` | `finance` | View, approve, or reject all payment requests on the platform. |
+| **Finance Analyst** | `finance2@buzzvel.com` | `test123` | `finance` | View, approve, or reject all payment requests on the platform. |
+
+---
+
+## 🧪 Running Tests
+
+To keep testing database credentials secure and prevent committing them to Git, tests use a separate local environment file (`.env.testing`) which is ignored by Git.
+
+### 1. Setup Testing Database
+Copy the `.env.testing.example` file to `.env.testing`:
+```bash
+cp .env.testing.example .env.testing
+```
+Configure your local Postgres credentials in the newly created `.env.testing` file.
+You will need have the `.ini` extension configured on your system, check extension=pdo_sqlite and extension=sqlite3.
+
+### 2. Execute the Test Suite
+To run the full suite of 27 tests with PHPUnit:
+```bash
+php artisan test
+```
+
+---
+
+## ⚙️ Automated Tasks (Artisan Commands)
+
+The application includes a custom artisan command to automatically expire pending requests that were created more than 48 hours ago.
+
+*   **Command:**
+    ```bash
+    php artisan payment-requests:expire
+    ```
+*   **Scheduling:** This command is configured to run daily in the background via the Laravel Task Scheduler (`routes/console.php`).
+
+---
+
+## 📖 API Documentation
+
+For technical details regarding request payloads, success and error JSON responses, and HTTP authorization headers, please refer to the complementary API documentation file:
+👉 [api_documentation.md](file:///c:/dev/buzzvel/api_documentation.md)
